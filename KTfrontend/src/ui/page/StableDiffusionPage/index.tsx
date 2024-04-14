@@ -6,6 +6,7 @@ import modal3 from "../../../pic/modal3.jpg.webp";
 import TopNavBar from "../../compoent/TopNavBar";
 import LeftComponent from "./LeftComponent";
 import RightComponent from "./RightComponent";
+import Grid from "@mui/material/Grid";
 
 const images = [
     {
@@ -38,17 +39,20 @@ export default function StableDiffusionPage() {
     return (
         <>
             <TopNavBar />
-            <Box
+            <Grid
                 display="flex"
                 alignItems="center"
                 height="90vh"
                 sx={{ backgroundColor: "#202020" }}
             >
-                <Box>
+                <Grid>
                     <LeftComponent />
+                </Grid>
+
+                <Box style={{marginLeft: '10vw'}}>
+                <RightComponent images={images}/>
                 </Box>
-                <RightComponent images={images} />
-            </Box>
+            </Grid>
         </>
     );
 }

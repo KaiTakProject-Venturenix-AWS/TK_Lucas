@@ -12,6 +12,7 @@ import modal2 from "../../../pic/modal2.jpg.webp";
 import modal21 from "../../../pic/modal21.jpg.webp";
 import modal3 from "../../../pic/modal3.jpg.webp";
 import TopNavBar from "../../compoent/TopNavBar.tsx";
+import {useNavigate} from "react-router-dom";
 //
 // const images = [
 //     {
@@ -114,13 +115,19 @@ const images = [
     'https://via.placeholder.com/270',
 ];
 
-export default function StableDiffusionPage() {
+export default function GeneratingPage() {
+    const navigate = useNavigate();
+
+    const handlePhotoClick = () => {
+        navigate('/result');
+    };
+
     return (
         <>
             <TopNavBar/>
             <Grid container>
                 {/* girrvc div */}
-                <Grid item xs={8}
+                <Grid item xs={11}
                       sx={{position: 'sticky', top: 0, minHeight: '100vh', padding: 4, backgroundColor: '#202020'}}>
                     <TextField
                         variant="outlined"
@@ -133,14 +140,18 @@ export default function StableDiffusionPage() {
                         Get Creative
                     </Button>
 
-                    <Grid container justifyContent="center" alignItems="center" sx={{ position: 'relative', minHeight: '100vh', padding: 4 }}>
+                    <Grid container justifyContent="center" alignItems="center">
+                        <img src={modal1} alt={`sea image`} style={{width: '50%'}} onClick={handlePhotoClick}/>
+                    </Grid>
+
+                    <Grid container justifyContent="center" alignItems="center" sx={{ position: 'relative', padding: 4 }}>
                         {/* Progress bar */}
-                        <LinearProgress sx={{ width: '100%', position: 'absolute', top: 0, left: 0, zIndex: 9999 }} />
+                        <LinearProgress sx={{ width: '100%', height: 10, position: 'absolute', top: 0, left: 0, zIndex: 9999, marginTop: "30px"}} />
                     </Grid>
 
                 </Grid>
 
-                <Grid item xs={4} sx={{position: 'relative', minHeight: '100vh', padding: 4}}>
+                <Grid item xs={1} sx={{position: 'relative', minHeight: '100vh', padding: 4}}>
                     {/* girrheader */}
                     <Grid item xs={12} sx={{marginBottom: 4}}>
                         <Typography variant="h5">最近的</Typography>
@@ -148,7 +159,7 @@ export default function StableDiffusionPage() {
                     {/* Single column of images */}
                     {images.map((image, index) => (
                         <Grid key={index} item xs={12}>
-                            <img src={image} alt={`sea image ${index + 1}`} style={{width: '100%'}}/>
+                            <img src={image} alt={`sea image ${index + 1}`} style={{width: '100px'}}/>
                         </Grid>
                     ))}
                 </Grid>

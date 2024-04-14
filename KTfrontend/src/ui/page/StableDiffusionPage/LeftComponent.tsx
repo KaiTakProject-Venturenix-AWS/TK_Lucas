@@ -1,10 +1,17 @@
 import React from 'react';
 import { Grid, Typography, TextField, Button, Box } from '@mui/material';
 import DrawIcon from '@mui/icons-material/Draw';
+import {useNavigate} from "react-router-dom";
 
 export default function LeftComponent() {
+    const navigate = useNavigate();
+
+    const handleGetCreativeClick = () => {
+        navigate('/generating');
+    };
+
   return (
-    <Box>
+    <Box style={{marginLeft: '20px'}}>
       <Typography
         variant="h4"
         gutterBottom
@@ -48,6 +55,7 @@ export default function LeftComponent() {
           justifyContent: "center",
           display: "flex",
         }}
+        onClick={handleGetCreativeClick}
       >
         Get Creative
       </Button>

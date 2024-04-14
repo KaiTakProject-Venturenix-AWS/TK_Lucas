@@ -76,50 +76,50 @@ export default function RightComponent({images}) {
   
   return (
     <>
-          <Grid
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          width: "100%",
-          gridTemplateColumns: "repeat(2, 1fr)", // Two columns
-          gap: 1, // Gap between items
-          justifyContent: "center",
-          alignItems: "center", // Center the content vertically
-        }}
+
+      <Grid
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)', // Two columns
+            gap: 1, // Gap between items
+
+           // Center the content vertically
+            width: '50vw',
+          }}
       >
         {images.map((image) => (
-          <ImageButton
-            focusRipple
-            key={image.title}
-            style={{
-              // width: image.width,
-              width: "100%", // Each item takes full width of its container
-              maxWidth: "400px", // Limit maximum width of each item if needed
-            }}
-          // onClick={() => handleImageClick(image.onclick)}
-          >
-            <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-            <ImageBackdrop className="MuiImageBackdrop-root" />
-            <Image>
-              <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                sx={{
-                  position: "relative",
-                  p: 4,
-                  pt: 2,
-                  pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                  opacity: 0,
+            <ImageButton
+                focusRipple
+                key={image.title}
+                style={{
+                  width: '100%', // Each item takes full width of its container
+                  maxWidth: '400px', // Limit maximum width of each item if needed
                 }}
-              >
-                {image.title}
-                {/* <ImageMarked className="MuiImageMarked-root" /> */}
-              </Typography>
-            </Image>
-          </ImageButton>
+                // onClick={() => handleImageClick(image.onclick)}
+            >
+              <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+              <ImageBackdrop className="MuiImageBackdrop-root" />
+              <Image>
+                <Typography
+                    component="span"
+                    variant="subtitle1"
+                    color="inherit"
+                    sx={{
+                      position: 'relative',
+                      p: 4,
+                      pt: 2,
+                      pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                      opacity: 0,
+                    }}
+                >
+                  {image.title}
+                </Typography>
+              </Image>
+            </ImageButton>
         ))}
       </Grid>
+
+
 
     </>
   )
