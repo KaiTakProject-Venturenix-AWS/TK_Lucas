@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import {Box, CircularProgress, Container, Divider, Typography} from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import AWS from 'aws-sdk';
+// import AWS from 'aws-sdk';
 import Button from '@mui/material/Button';
 import TopNavBar from "../../compoent/TopNavBar.tsx";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-const S3_BUCKET = 'proecttesting';
-const REGION = 'ap-southeast-1';
-const ACCESS_KEY = 'AKIAZQ3DP43JAHUVQRTN'; // Update with your actual access key
-const SECRET_ACCESS_KEY = 'oeQV4Q0tFK8k39E3KkMRcdBIuKn4IKbmexjvsVB0'; // Update with your actual secret access key
-
-const s3 = new AWS.S3({
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY,
-    region: REGION,
-});
+// const S3_BUCKET = 'proecttesting';
+// const REGION = 'ap-southeast-1';
+// const ACCESS_KEY = 'AKIAZQ3DP43JAHUVQRTN'; // Update with your actual access key
+// const SECRET_ACCESS_KEY = 'oeQV4Q0tFK8k39E3KkMRcdBIuKn4IKbmexjvsVB0'; // Update with your actual secret access key
+//
+// const s3 = new AWS.S3({
+//     accessKeyId: ACCESS_KEY,
+//     secretAccessKey: SECRET_ACCESS_KEY,
+//     region: REGION,
+// });
 
 // const VisuallyHiddenInput = styled('input')({
 //     clip: 'rect(0 0 0 0)',
@@ -41,31 +41,32 @@ export default function UploadVideoPage() {
     const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             setSelectedFile(e.target.files[0]);
-            handleUpload(e.target.files[0]);
+            // handleUpload(e.target.files[0]);
         }
     };
 
-    const handleUpload = async (file: File | null) => {
-        if (!file) return;
-
-        const folderName = 'new_folder'; // Specify the folder name , format : if use firebase for login , userID+useName ? 001LucasPun
-        const fileName = file.name;
-
-        const params = {
-            Bucket: S3_BUCKET,
-            Key: `${folderName}/${fileName}`,
-            Body: file,
-            ACL: 'public-read'
-        };
-
-        try {
-            const data = await s3.upload(params).promise();
-            console.log('Upload successful:', data.Location);
-            setFileDetails('');
-        } catch (err) {
-            console.error('Error uploading file:', err);
-        }
-    };
+    // const handleUpload = async () => {
+    // const handleUpload = async (file: File | null) => {
+    //     if (!file) return;
+    //
+    //     const folderName = 'new_folder'; // Specify the folder name , format : if use firebase for login , userID+useName ? 001LucasPun
+    //     const fileName = file.name;
+    //
+    //     const params = {
+    //         Bucket: S3_BUCKET,
+    //         Key: `${folderName}/${fileName}`,
+    //         Body: file,
+    //         ACL: 'public-read'
+    //     };
+    //
+    //     try {
+    //         const data = await s3.upload(params).promise();
+    //         console.log('Upload successful:', data.Location);
+    //         setFileDetails('');
+    //     } catch (err) {
+    //         console.error('Error uploading file:', err);
+    //     }
+    // };
 
     useEffect(() => {
         const handleDragEnter: EventListener = (e: Event) => {
@@ -201,7 +202,7 @@ export default function UploadVideoPage() {
                         variant="contained"
                         tabIndex={-1}
                         startIcon={<CloudUploadIcon/>}
-                        onClick={() => handleUpload(selectedFile)}
+                        // onClick={() => handleUpload(selectedFile)}
                         disabled={!selectedFile}
                     >
                         Upload file
