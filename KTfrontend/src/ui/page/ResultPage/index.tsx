@@ -114,7 +114,7 @@ export default function ResultPage() {
                                 {images[currentImageIndex].title}
                             </Typography>
 
-                            <Button variant="contained" color="primary" onClick={downloadImage} mt={2}>
+                            <Button variant="contained" color="primary" onClick={downloadImage}>
                                 Download
                             </Button>
 

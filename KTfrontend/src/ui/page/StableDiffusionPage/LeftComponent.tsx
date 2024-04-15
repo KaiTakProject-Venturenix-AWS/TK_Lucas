@@ -1,5 +1,4 @@
-import React from 'react';
-import { Grid, Typography, TextField, Button, Box } from '@mui/material';
+import { Typography, TextField, Button, Box } from '@mui/material';
 import DrawIcon from '@mui/icons-material/Draw';
 import {useNavigate} from "react-router-dom";
 

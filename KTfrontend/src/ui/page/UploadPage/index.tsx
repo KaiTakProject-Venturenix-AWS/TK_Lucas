@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Box, CircularProgress, Container, Divider, Typography} from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import AWS from 'aws-sdk';
-import {styled} from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import TopNavBar from "../../compoent/TopNavBar.tsx";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -19,21 +18,21 @@ const s3 = new AWS.S3({
     region: REGION,
 });
 
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-});
+// const VisuallyHiddenInput = styled('input')({
+//     clip: 'rect(0 0 0 0)',
+//     clipPath: 'inset(50%)',
+//     height: 1,
+//     overflow: 'hidden',
+//     position: 'absolute',
+//     bottom: 0,
+//     left: 0,
+//     whiteSpace: 'nowrap',
+//     width: 1,
+// });
 
 
 export default function UploadVideoPage() {
-    const [uploading, setUploading] = useState(false);
+    const [uploading] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null); // Add type declaration for selectedFile
     const [fileDetails, setFileDetails] = useState<string>('');
@@ -67,24 +66,26 @@ export default function UploadVideoPage() {
             console.error('Error uploading file:', err);
         }
     };
+
     useEffect(() => {
-        const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+        const handleDragEnter: EventListener = (e: Event) => {
             e.preventDefault();
             setIsDragging(true);
         };
 
-        const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+        const handleDragLeave: EventListener = (e: Event) => {
             e.preventDefault();
             setIsDragging(false);
         };
 
-
-        const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        const handleDrop: EventListener = (e: Event) => {
             e.preventDefault();
             setIsDragging(false);
-            const file = e.dataTransfer.files[0];
-            setSelectedFile(file);
-            setFileDetails(`File Name: ${file.name}, Size: ${file.size} bytes, Type: ${file.type}`);
+            const file = (e as DragEvent).dataTransfer?.files[0];
+            if (file) {
+                setSelectedFile(file);
+                setFileDetails(`File Name: ${file.name}, Size: ${file.size} bytes, Type: ${file.type}`);
+            }
         };
 
         // Add event listeners to handle drag and drop on the entire document
